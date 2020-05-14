@@ -25,8 +25,12 @@ const broadcastAudioFile = (file) => {
 				const channel = guild.channels.resolve(channelID);
 				
 				if (channel && channel.type == 'voice') {
-					console.info(`Playing audio in guild '${guild.name}' in channel '${channel.name}'`);
-					playAudioFile(channel, file);
+					if (channel.members.size > 0) {
+						console.info(`Playing audio in guild '${guild.name}', channel '${channel.name}'`);
+						playAudioFile(channel, file);
+					} else {
+						console.info(`Skipping guild '${guild.name}', channel '${channel.name}' because it is empty`);
+					}
 				}
 			}
 		});
@@ -56,6 +60,7 @@ bot.on('message', message => {
 				const channel = message.member.voice.channel;
 				message.reply(`set jingle channel to ${channel.name}.`);
 				db.set(message.guild.id, channel.id);
+				console.info(`Set guild '${message.guild.name}' to channel '${channel.name}'`);
 			} else {
 				message.reply('please join a voice channel first.');
 			}
