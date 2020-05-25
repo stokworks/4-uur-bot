@@ -1,6 +1,6 @@
-require('dotenv').config();
-const http = require('http');
 const path = require('path');
+require('dotenv').config({ path: path.join(__dirname, '.env') });
+const http = require('http');
 const JSONdb = require('simple-json-db');
 const Discord = require('discord.js');
 const bot = new Discord.Client();
