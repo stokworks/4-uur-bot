@@ -1,5 +1,7 @@
+#! /usr/bin/env node
+
 const path = require('path');
-require('dotenv').config({ path: path.join(__dirname, '.env') });
+require('dotenv').config({ path: path.join(__dirname, '.env.local') });
 const http = require('http');
 const JSONdb = require('simple-json-db');
 const Discord = require('discord.js');
